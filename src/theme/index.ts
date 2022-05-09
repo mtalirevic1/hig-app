@@ -1,28 +1,29 @@
 import {createTheme as createMuiTheme} from '@mui/material';
-import variants from './variants';
 import breakpoints from './breakpoints';
 import typography from './typography';
-import components from './components';
+import createThemedComponents from './components';
 import {THEME} from './types';
+import palette from './palette';
+import {DefaultPaletteOptions} from './defaultPaletteInterface';
 
 const createTheme = (name: THEME) => {
-    let themeConfig = variants.find((variant) => variant.name === name)
+    let themePalette = palette[name];
 
-    if (!themeConfig) {
+    if (!themePalette) {
         console.warn(new Error(`The theme ${name} is not valid`));
-        themeConfig = variants[0];
+        themePalette = palette[THEME.DEFAULT];
     }
 
     return createMuiTheme(
         {
             spacing: 4,
             breakpoints: breakpoints,
-            components: components,
+            components: createThemedComponents(themePalette as DefaultPaletteOptions),
             typography: typography,
-            palette: themeConfig.palette,
+            palette: themePalette,
         },
         {
-            name: themeConfig.name,
+            name,
         },
     )
 }

@@ -9,7 +9,8 @@ const App = () => {
         <ThemeProvider theme={theme}>
         <div className="App" style={{backgroundColor: 'black'}}>
             <h1>Text</h1>
-            <Button variant='contained'>Test</Button>
+            <Button variant='contained' color={'secondary'}>Test</Button>
+            <Button variant='gradient'>Gradient</Button>
         </div>
         </ThemeProvider>
     );
